@@ -4,11 +4,11 @@ import { BaseEntity } from 'src/shared/infrastructure/schema/base.entity';
 import { ServiceScopeEntity } from './service-scope.entity';
 
 @Entity(ROUTE_LOCATION_CONVERSION_SCHEMA.TABLE_NAME)
-export class RouteLocationConversionEntity extends BaseEntity {
+export class RouteLocationConversionEntity {
   @PrimaryColumn({
     name: ROUTE_LOCATION_CONVERSION_SCHEMA.COLUMNS.SERVICE_SCOPE_CODE,
     type: 'varchar',
-    precision: 3,
+    length: 3,
     nullable: false,
   })
   serviceScopeCode: string;
@@ -16,7 +16,7 @@ export class RouteLocationConversionEntity extends BaseEntity {
   @PrimaryColumn({
     name: ROUTE_LOCATION_CONVERSION_SCHEMA.COLUMNS.ORIGINAL_LOCATION_CODE,
     type: 'varchar',
-    precision: 5,
+    length: 5,
     nullable: false,
   })
   originalLocationCode: string;
@@ -24,7 +24,7 @@ export class RouteLocationConversionEntity extends BaseEntity {
   @PrimaryColumn({
     name: ROUTE_LOCATION_CONVERSION_SCHEMA.COLUMNS.CONVERSION_LOCATION_CODE,
     type: 'varchar',
-    precision: 5,
+    length: 5,
     nullable: false,
   })
   conversionLocationCode: string;
@@ -32,7 +32,7 @@ export class RouteLocationConversionEntity extends BaseEntity {
   @Column({
     name: ROUTE_LOCATION_CONVERSION_SCHEMA.COLUMNS.POR_APPLY_FLAG,
     type: 'varchar',
-    precision: 1,
+    length: 1,
     nullable: true,
   })
   porApplyFlag?: string;
@@ -40,7 +40,7 @@ export class RouteLocationConversionEntity extends BaseEntity {
   @Column({
     name: ROUTE_LOCATION_CONVERSION_SCHEMA.COLUMNS.POL_APPLY_FLAG,
     type: 'varchar',
-    precision: 1,
+    length: 1,
     nullable: true,
   })
   polApplyFlag?: string;
@@ -48,7 +48,7 @@ export class RouteLocationConversionEntity extends BaseEntity {
   @Column({
     name: ROUTE_LOCATION_CONVERSION_SCHEMA.COLUMNS.POD_APPLY_FLAG,
     type: 'varchar',
-    precision: 1,
+    length: 1,
     nullable: true,
   })
   podApplyFlag?: string;
@@ -56,7 +56,7 @@ export class RouteLocationConversionEntity extends BaseEntity {
   @Column({
     name: ROUTE_LOCATION_CONVERSION_SCHEMA.COLUMNS.DEL_APPLY_FLAG,
     type: 'varchar',
-    precision: 1,
+    length: 1,
     nullable: true,
   })
   delApplyFlag?: string;
@@ -64,7 +64,7 @@ export class RouteLocationConversionEntity extends BaseEntity {
   @Column({
     name: ROUTE_LOCATION_CONVERSION_SCHEMA.COLUMNS.PRE_RELAY_PORT_APPLY_FLAG,
     type: 'varchar',
-    precision: 1,
+    length: 1,
     nullable: true,
   })
   preRelayPortApplyFlag?: string;
@@ -72,7 +72,7 @@ export class RouteLocationConversionEntity extends BaseEntity {
   @Column({
     name: ROUTE_LOCATION_CONVERSION_SCHEMA.COLUMNS.POST_RELAY_PORT_APPLY_FLAG,
     type: 'varchar',
-    precision: 1,
+    length: 1,
     nullable: true,
   })
   postRelayPortApplyFlag?: string;
@@ -80,7 +80,7 @@ export class RouteLocationConversionEntity extends BaseEntity {
   @Column({
     name: ROUTE_LOCATION_CONVERSION_SCHEMA.COLUMNS.CREATE_USER_ID,
     type: 'varchar',
-    precision: 100,
+    length: 100,
     nullable: true,
   })
   createUserId?: string;
@@ -95,7 +95,7 @@ export class RouteLocationConversionEntity extends BaseEntity {
   @Column({
     name: ROUTE_LOCATION_CONVERSION_SCHEMA.COLUMNS.UPDATE_USER_ID,
     type: 'varchar',
-    precision: 100,
+    length: 100,
     nullable: true,
   })
   updateUserId?: string;

@@ -1,4 +1,4 @@
-import { BASE_SCHEMA } from 'src/shared/infrastructure/schema/base.schema';
+import { BASE_SCHEMA } from '@shared/infrastructure/schema/base.schema';
 
 export const ROUTE_LOCATION_CONVERSION_SCHEMA = {
   TABLE_NAME: 'route_location_conversions',

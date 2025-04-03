@@ -23,3 +23,9 @@ export abstract class BaseEntity<T> {
     return this._id.equals(object._id);
   }
 }
+
+export interface BaseEntityProps {
+  createdAt: Date;
+  updatedAt: Date | null;
+  deletedAt: Date | null;
+}

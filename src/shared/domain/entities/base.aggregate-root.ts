@@ -36,7 +36,7 @@ export abstract class BaseAggregateRoot<T> extends BaseEntity<T> {
     console.info(
       `[Domain Event Created]:`,
       thisClass.constructor.name,
-      '==>',
+      '=====>',
       domainEventClass.constructor.name,
     );
   }

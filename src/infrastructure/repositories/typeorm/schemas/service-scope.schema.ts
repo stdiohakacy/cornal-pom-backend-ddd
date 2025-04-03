@@ -1,4 +1,4 @@
-import { BASE_SCHEMA } from 'src/shared/infrastructure/schema/base.schema';
+import { BASE_SCHEMA } from '@shared/infrastructure/schema/base.schema';
 
 export const SERVICE_SCOPE_SCHEMA = {
   TABLE_NAME: 'service_scopes',
