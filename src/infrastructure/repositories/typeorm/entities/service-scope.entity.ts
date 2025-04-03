@@ -64,7 +64,7 @@ export class ServiceScopeEntity {
   @Column({
     name: SERVICE_SCOPE_SCHEMA.COLUMNS.CREATE_USER_ID,
     type: 'varchar',
-    length: 8,
+    length: 100,
     nullable: true,
   })
   createUserId?: string;
@@ -79,7 +79,7 @@ export class ServiceScopeEntity {
   @Column({
     name: SERVICE_SCOPE_SCHEMA.COLUMNS.UPDATE_USER_ID,
     type: 'varchar',
-    length: 8,
+    length: 100,
     nullable: true,
   })
   updateUserId?: string;
@@ -109,7 +109,7 @@ export class ServiceScopeEntity {
   @Column({
     name: SERVICE_SCOPE_SCHEMA.COLUMNS.EAI_IF_ID,
     type: 'varchar',
-    length: 8,
+    length: 32,
     nullable: true,
   })
   eaiIfId?: string;
@@ -117,7 +117,7 @@ export class ServiceScopeEntity {
   @Column({
     name: SERVICE_SCOPE_SCHEMA.COLUMNS.MODIFY_COST_CTR_CODE,
     type: 'varchar',
-    length: 8,
+    length: 10,
     nullable: true,
   })
   modifyCostCtrCode?: string;
