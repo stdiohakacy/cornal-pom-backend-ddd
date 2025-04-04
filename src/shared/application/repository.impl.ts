@@ -1,12 +1,13 @@
-import { BaseAggregateRoot } from 'src/shared/domain/entities/base.aggregate-root';
-import { BaseUniqueEntityId } from 'src/shared/domain/identifier/base.unique-entity.id';
-import { Either, left, right } from 'src/shared/domain/patterns/result.pattern';
+import { FindManyOptions, Repository } from 'typeorm';
+import { BaseAggregateRoot } from '../domain/entities/base.aggregate-root';
+import { BaseUniqueEntityId } from '../domain/identifier/base.unique-entity.id';
+import { Either, left, right } from '../domain/patterns/result.pattern';
 import { RepositoryException } from '../infrastructure/exception/repository.exception';
 import {
   QueryCriteriaInterface,
   RepositoryInterface,
 } from '../infrastructure/repository/repository.interface';
-import { FindManyOptions, Repository } from 'typeorm';
+
 import { BASE_SCHEMA } from '../infrastructure/schema/base.schema';
 import { BaseEntity } from '../infrastructure/schema/base.entity';
 

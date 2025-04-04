@@ -1,11 +1,10 @@
-import { BaseAggregateRoot } from 'src/shared/domain/entities/base.aggregate-root';
 import {
   BaseEntity,
   BaseEntityProps,
-} from 'src/shared/domain/entities/base.entity';
-import { BaseUniqueEntityId } from 'src/shared/domain/identifier/base.unique-entity.id';
-import { Guard } from 'src/shared/domain/patterns/guard.pattern';
-import { Result } from 'src/shared/domain/patterns/result.pattern';
+} from '@shared/domain/entities/base.entity';
+import { BaseUniqueEntityId } from '@shared/domain/identifier/base.unique-entity.id';
+import { Guard } from '@shared/domain/patterns/guard.pattern';
+import { Result } from '@shared/domain/patterns/result.pattern';
 import { ServiceScopeAggregate } from './service-scope.aggregate';
 
 interface RouteLocationConversionProps extends BaseEntityProps {

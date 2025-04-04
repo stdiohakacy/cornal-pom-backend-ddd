@@ -1,6 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { SERVICE_SCOPE_SCHEMA } from '../schemas/service-scope.schema';
-import { BaseEntity } from 'src/shared/infrastructure/schema/base.entity';
 import { RouteLocationConversionEntity } from './route-location-conversion.entity';
 
 @Entity(SERVICE_SCOPE_SCHEMA.TABLE_NAME)

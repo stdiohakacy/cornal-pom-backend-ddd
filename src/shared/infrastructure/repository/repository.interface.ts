@@ -1,7 +1,7 @@
-import { BaseAggregateRoot } from 'src/shared/domain/entities/base.aggregate-root';
-import { BaseUniqueEntityId } from 'src/shared/domain/identifier/base.unique-entity.id';
+import { BaseAggregateRoot } from '../../domain/entities/base.aggregate-root';
+import { BaseUniqueEntityId } from '../../domain/identifier/base.unique-entity.id';
 import { RepositoryException } from '../exception/repository.exception';
-import { Either } from 'src/shared/domain/patterns/result.pattern';
+import { Either } from '../../domain/patterns/result.pattern';
 
 export interface QueryCriteriaInterface {
   filters?: Record<string, unknown>;

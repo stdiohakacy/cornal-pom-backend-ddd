@@ -1,8 +1,8 @@
-import { BaseAggregateRoot } from 'src/shared/domain/entities/base.aggregate-root';
-import { BaseEntityProps } from 'src/shared/domain/entities/base.entity';
-import { BaseUniqueEntityId } from 'src/shared/domain/identifier/base.unique-entity.id';
-import { Guard } from 'src/shared/domain/patterns/guard.pattern';
-import { Result } from 'src/shared/domain/patterns/result.pattern';
+import { BaseAggregateRoot } from '@shared/domain/entities/base.aggregate-root';
+import { BaseEntityProps } from '@shared/domain/entities/base.entity';
+import { BaseUniqueEntityId } from '@shared/domain/identifier/base.unique-entity.id';
+import { Guard } from '@shared/domain/patterns/guard.pattern';
+import { Result } from '@shared/domain/patterns/result.pattern';
 import { RouteLocationConversionEntity } from './route-location-conversion.entity';
 import { ServiceScopeCreatedEvent } from '../events/service-scope.created.event';
 

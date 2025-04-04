@@ -1,5 +1,5 @@
-import { BaseDomainEventInterface } from 'src/shared/domain/events/domain.event.interface';
-import { BaseUniqueEntityId } from 'src/shared/domain/identifier/base.unique-entity.id';
+import { BaseDomainEventInterface } from '@shared/domain/events/domain.event.interface';
+import { BaseUniqueEntityId } from '@shared/domain/identifier/base.unique-entity.id';
 
 export class ServiceScopeCreatedEvent implements BaseDomainEventInterface {
   public readonly dateTimeOccurred: Date;
