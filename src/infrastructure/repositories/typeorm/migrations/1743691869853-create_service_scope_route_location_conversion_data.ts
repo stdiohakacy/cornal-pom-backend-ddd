@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 import { SERVICE_SCOPE_SCHEMA } from '../schemas/service-scope.schema';
 
-export class CreateData1743691869853 implements MigrationInterface {
+export class CreateServiceScope1743691869853 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
             INSERT INTO ${SERVICE_SCOPE_SCHEMA.TABLE_NAME} (

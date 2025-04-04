@@ -1,9 +1,9 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class CreateOrderOrderItemTables1743668010290
+export class CreateServiceScopeAndRouteLocationConversionTables1743668010290
   implements MigrationInterface
 {
-  name = 'CreateOrderOrderItemTables1743668010290';
+  name = 'CreateServiceScopeAndRouteLocationConversionTables1743668010290';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
