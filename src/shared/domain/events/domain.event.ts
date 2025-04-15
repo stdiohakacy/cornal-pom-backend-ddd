@@ -1,4 +1,4 @@
-import { BaseAggregateRoot } from '../entities/base.aggregate-root';
+import { BaseAggregateRoot } from '../aggregates/base.aggregate-root';
 import { BaseUniqueEntityId } from '../identifier/base.unique-entity.id';
 import { BaseDomainEventInterface } from './domain.event.interface';
 

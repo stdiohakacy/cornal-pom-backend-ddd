@@ -14,6 +14,10 @@ export abstract class BaseEntity<T> {
     this.props = props;
   }
 
+  public get id(): BaseUniqueEntityId {
+    return this._id;
+  }
+
   public equals(object: BaseEntity<T>): boolean {
     if (!object) return false;
     if (!isEntity(object)) {
@@ -25,7 +29,7 @@ export abstract class BaseEntity<T> {
 }
 
 export interface BaseEntityProps {
-  createdAt: Date;
-  updatedAt: Date | null;
-  deletedAt: Date | null;
+  createdAt?: Date;
+  updatedAt?: Date | null;
+  deletedAt?: Date | null;
 }

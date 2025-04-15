@@ -1,3 +1,3 @@
 export interface UseCaseInterface<TIn, TOut> {
-  execute(request: TIn): Promise<TOut>;
+  execute(request: TIn): TOut | Promise<TOut>;
 }

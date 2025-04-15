@@ -48,6 +48,9 @@ export class Guard {
       : Result.fail(`Text is greater than ${numChars} chars.`);
   }
 
+  /**
+   * Check if value is null or undefined
+   */
   public static againstNullOrUndefined<T>(
     argument: T | null | undefined,
     argumentName: string,
@@ -58,6 +61,22 @@ export class Guard {
     return Result.ok();
   }
 
+  /**
+   * Check if value is null, undefined or empty (for string)
+   */
+  public static againstNullOrUndefinedOrEmpty(
+    input: string | null | undefined,
+    argumentName: string,
+  ): Result<GuardResponse> {
+    if (input === null || input === undefined || input.trim().length === 0) {
+      return Result.fail(`${argumentName} is null or undefined or empty`);
+    }
+    return Result.ok();
+  }
+
+  /**
+   * Bulk check for null or undefined in multiple arguments
+   */
   public static againstNullOrUndefinedBulk<T>(
     args: GuardArgumentCollection<T>,
   ): Result<GuardResponse> {
@@ -84,6 +103,9 @@ export class Guard {
         );
   }
 
+  /**
+   * Ensure value is in range
+   */
   public static inRange(
     num: number,
     min: number,
@@ -109,5 +131,39 @@ export class Guard {
       }
     }
     return Result.ok();
+  }
+
+  /**
+   * Ensure string has minimum length
+   */
+  public static minLength(value: string, min: number, argumentName: string) {
+    const isValid = value.length >= min;
+    return isValid
+      ? Result.ok()
+      : Result.fail(`${argumentName} must be at least ${min} characters.`);
+  }
+
+  /**
+   * Ensure string has maximum length
+   */
+  public static maxLength(value: string, max: number, argumentName: string) {
+    const isValid = value.length <= max;
+    return isValid
+      ? Result.ok()
+      : Result.fail(`${argumentName} must be at most ${max} characters.`);
+  }
+
+  /**
+   * Ensure boolean is true
+   */
+  public static isTrue(value: boolean, argumentName: string) {
+    return value ? Result.ok() : Result.fail(`${argumentName} must be true.`);
+  }
+
+  /**
+   * Ensure boolean is false
+   */
+  public static isFalse(value: boolean, argumentName: string) {
+    return !value ? Result.ok() : Result.fail(`${argumentName} must be false.`);
   }
 }
