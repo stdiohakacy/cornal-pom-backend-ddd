@@ -20,6 +20,8 @@ import {
   UserRepositoryInterface,
 } from 'src/application/repositories/group/user.repository.inteface';
 import { GroupErrors } from 'src/domain/bounded-context/group/errors/group.errors';
+import { EventBus } from '@nestjs/cqrs';
+import { GroupCreatedApplicationEvent } from 'src/application/events/groups/group.created.application.event';
 
 export type GroupCreateResponse = Either<
   | GroupErrors.CreatorNotFoundError
@@ -38,6 +40,7 @@ export class GroupCreateUseCase
     private readonly userRepository: UserRepositoryInterface,
     @Inject(GROUP_REPOSITORY_PORT)
     private readonly groupRepository: GroupRepositoryInterface,
+    private readonly eventBus: EventBus,
   ) {}
 
   async execute(dto: GroupCreateDto): Promise<GroupCreateResponse> {
@@ -106,6 +109,12 @@ export class GroupCreateUseCase
         ),
       );
     }
+
+    // Emit Event
+
+    this.eventBus.publish(
+      new GroupCreatedApplicationEvent(group.id, group.creatorId, group.name),
+    );
 
     return right(Result.ok(group.id));
   }

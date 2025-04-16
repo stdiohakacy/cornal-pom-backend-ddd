@@ -4,6 +4,7 @@ import { BaseUniqueEntityId } from '@shared/domain/identifier/base.unique-entity
 import { Result } from '@shared/domain/patterns/result.pattern';
 import { Guard } from '@shared/domain/patterns/guard.pattern';
 import { GroupMemberVO } from '../value-objects/group-member.vo';
+import { GroupCreatedDomainEvent } from '../events/group.created.event';
 
 export interface GroupProps extends BaseEntityProps {
   name: string;
@@ -42,6 +43,10 @@ export class Group extends BaseAggregateRoot<GroupProps> {
       },
       id,
     );
+
+    if (group) {
+      group.addDomainEvent(new GroupCreatedDomainEvent(id, adminUserId));
+    }
 
     return Result.ok<Group>(group);
   }
