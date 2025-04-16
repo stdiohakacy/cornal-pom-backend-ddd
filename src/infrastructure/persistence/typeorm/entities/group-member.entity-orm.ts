@@ -1,8 +1,8 @@
 import {
   Column,
   Entity,
+  Index,
   JoinColumn,
-  ManyToMany,
   ManyToOne,
   PrimaryColumn,
 } from 'typeorm';
@@ -19,6 +19,7 @@ export class GroupMemberEntityOrm extends BaseEntity {
     length: 50,
     nullable: false,
   })
+  @Index()
   userId: string;
 
   @PrimaryColumn({
@@ -27,6 +28,7 @@ export class GroupMemberEntityOrm extends BaseEntity {
     length: 50,
     nullable: false,
   })
+  @Index()
   groupId: string;
 
   @Column({

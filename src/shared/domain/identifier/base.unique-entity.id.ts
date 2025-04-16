@@ -1,7 +1,7 @@
 import { BaseIdentifier } from './base.identifier';
 
 export class BaseUniqueEntityId extends BaseIdentifier<string | number> {
-  constructor(id: string | number) {
-    super(id);
+  constructor(id?: string | number) {
+    super(id ? id : BaseUniqueEntityId.generate());
   }
 }

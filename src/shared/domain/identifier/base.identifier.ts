@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+
 export class BaseIdentifier<T> {
   constructor(private value: T) {
     this.value = value;
@@ -20,5 +22,9 @@ export class BaseIdentifier<T> {
     }
 
     return id.toValue() === this.value;
+  }
+
+  static generate() {
+    return randomUUID();
   }
 }
