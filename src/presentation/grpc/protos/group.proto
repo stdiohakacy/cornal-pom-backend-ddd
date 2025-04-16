@@ -1,5 +1,5 @@
 syntax = "proto3";
-package group.v1;
+package group;
 import "google/protobuf/timestamp.proto";
 
 // DTO
@@ -12,7 +12,6 @@ message GroupDto {
 message ResponseMetadata {
     int32 code = 1;
     string message = 2;
-    google.protobuf.Timestamp timestamp = 3;
 }
 
 message CreateGroupRequest {

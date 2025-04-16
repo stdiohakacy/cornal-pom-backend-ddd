@@ -11,7 +11,7 @@ export class GroupCreateHandler
 {
   constructor(private readonly groupCreateUseCase: GroupCreateUseCase) {}
 
-  async execute(command: GroupCreateCommand): Promise<GroupCreateResponse> {
+  execute(command: GroupCreateCommand): Promise<GroupCreateResponse> {
     return this.groupCreateUseCase.execute(command.dto);
   }
 }

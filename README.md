@@ -8,4 +8,4 @@ grpcurl -plaintext \
       "creatorId": "bb842e65-ece7-4b0a-a81c-fa5f738a2438"
     }
   }' \
-  localhost:6000 group.v1.GroupInfoService/CreateGroup
+  localhost:6000 group.GroupInfoService/CreateGroup
