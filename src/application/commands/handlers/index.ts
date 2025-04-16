@@ -1,3 +1,3 @@
-import { GroupCreateHandler } from './group.create.handler';
+import { CreateGroupCommandHandler } from './group.create.command.handler';
 
-export const groupCommandHandlers = [GroupCreateHandler];
+export const groupCommandHandlers = [CreateGroupCommandHandler];

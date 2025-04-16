@@ -6,7 +6,7 @@ import {
 } from 'src/application/use-cases/group/group.create.use-case';
 
 @CommandHandler(GroupCreateCommand)
-export class GroupCreateHandler
+export class CreateGroupCommandHandler
   implements ICommandHandler<GroupCreateCommand, GroupCreateResponse>
 {
   constructor(private readonly groupCreateUseCase: GroupCreateUseCase) {}

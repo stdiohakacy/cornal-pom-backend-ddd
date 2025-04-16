@@ -23,8 +23,6 @@ export class GroupController {
 
     if (result.isLeft()) {
       const error = result.value;
-      console.log(error);
-
       if (error instanceof GroupErrors.CreatorNotFoundError) {
         throw new RpcException({
           code: status.NOT_FOUND,

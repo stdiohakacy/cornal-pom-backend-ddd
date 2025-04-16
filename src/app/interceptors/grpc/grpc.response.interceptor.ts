@@ -26,6 +26,7 @@ export class GrpcResponseInterceptor implements NestInterceptor {
               response: {
                 code: 201,
                 message: 'Success',
+                timestamp: new Date().toISOString(),
               },
             };
           }
