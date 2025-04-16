@@ -43,36 +43,34 @@ export class GroupCreateUseCase
   async execute(dto: GroupCreateDto): Promise<GroupCreateResponse> {
     const { name, description, creatorId } = dto;
 
-    // Is creator exist
     const creatorUserId = new BaseUniqueEntityId(creatorId);
     const existOrError = await this.userRepository.exists(creatorUserId);
+
     if (existOrError.isLeft()) {
       return left(
         new RepositoryError(
-          'Failed to check if user exists',
+          'Failed to check user',
           existOrError.value,
           'GroupCreateUseCase',
         ),
       );
     }
 
-    const exist = existOrError.value;
-
-    if (!exist) {
-      return left(new GroupErrors.CreatorNotFoundError(creatorId.toString()));
+    if (!existOrError.value) {
+      return left(
+        new GroupErrors.CreatorNotFoundError(creatorUserId.toString()),
+      );
     }
 
-    // Create admin member
     const adminOrError = GroupMemberVO.createAdmin(creatorUserId);
     if (adminOrError.isFailure) {
       return left(
         new GroupErrors.InvalidGroupMemberError(
-          String(adminOrError.getErrorValue()),
+          adminOrError.getErrorValue().toString(),
         ),
       );
     }
 
-    //  Create Group Aggregate
     const groupOrError = Group.create(
       {
         name,
@@ -84,33 +82,31 @@ export class GroupCreateUseCase
         deletedAt: null,
       },
       creatorUserId,
-      new BaseUniqueEntityId(),
     );
 
     if (groupOrError.isFailure) {
       return left(
-        new GroupErrors.InvalidGroupError(String(groupOrError.getErrorValue())),
+        new GroupErrors.InvalidGroupError(
+          groupOrError.getErrorValue().toString(),
+        ),
       );
     }
 
     const group = groupOrError.getValue();
+    const saveOrError = await this.groupRepository.save(group);
 
-    // Save Group Aggregate
-    const groupSavedOrError = await this.groupRepository.save(group);
-
-    if (groupSavedOrError.isLeft()) {
+    if (saveOrError.isLeft()) {
       return left(
         RepositoryError.toResult(
           new RepositoryError(
-            `Failed to create group`,
-            groupSavedOrError.value,
+            'Failed to save group',
+            saveOrError.value,
             'GroupCreateUseCase',
           ),
         ),
       );
     }
 
-    // Return Result
-    return right(Result.ok<BaseUniqueEntityId>(group.id));
+    return right(Result.ok(group.id));
   }
 }

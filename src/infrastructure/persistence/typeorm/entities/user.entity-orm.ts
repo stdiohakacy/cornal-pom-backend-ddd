@@ -21,9 +21,6 @@ export class UserEntityOrm extends BaseEntity {
   })
   email: string;
 
-  @OneToMany(() => GroupMemberEntityOrm, (groupMembers) => groupMembers.user, {
-    cascade: true,
-    eager: true,
-  })
+  @OneToMany(() => GroupMemberEntityOrm, (groupMembers) => groupMembers.user)
   groupMembers: GroupMemberEntityOrm[];
 }

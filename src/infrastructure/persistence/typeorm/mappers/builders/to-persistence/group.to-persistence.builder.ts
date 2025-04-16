@@ -26,19 +26,23 @@ export class GroupToPersistenceBuilder extends BaseBuilder<
     groupEntityOrm.updatedAt = this.group.props.updatedAt;
     groupEntityOrm.deletedAt = this.group.props.deletedAt;
 
-    groupEntityOrm.groupMembers = this.group.props.members.map(
-      (member: GroupMemberVO) => {
-        const memberEntityOrm = new GroupMemberEntityOrm();
-
-        memberEntityOrm.userId = member.userId.toString();
-        memberEntityOrm.groupId = member.groupId.toString();
-        memberEntityOrm.role = member.role;
-        memberEntityOrm.joinedAt = member.joinedAt;
-
-        return memberEntityOrm;
-      },
-    );
-
     return groupEntityOrm;
+  }
+
+  public setGroupMembersPersistence(): GroupMemberEntityOrm[] {
+    return this.group.props.members.map((groupMemberVO: GroupMemberVO) => {
+      const groupMemberEntityOrm = new GroupMemberEntityOrm();
+
+      groupMemberEntityOrm.userId = groupMemberVO.userId.toString();
+      groupMemberEntityOrm.groupId = this.group.id.toString();
+      groupMemberEntityOrm.role = groupMemberVO.role;
+      groupMemberEntityOrm.joinedAt = groupMemberVO.joinedAt;
+
+      return groupMemberEntityOrm;
+    });
+  }
+
+  public getGroupMembersPersistence(): GroupMemberEntityOrm[] {
+    return this.setGroupMembersPersistence();
   }
 }

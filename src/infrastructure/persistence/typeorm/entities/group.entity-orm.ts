@@ -28,9 +28,6 @@ export class GroupEntityOrm extends BaseEntity {
   })
   creatorId: string;
 
-  @OneToMany(() => GroupMemberEntityOrm, (groupMembers) => groupMembers.group, {
-    cascade: true,
-    eager: true,
-  })
+  @OneToMany(() => GroupMemberEntityOrm, (groupMembers) => groupMembers.group)
   groupMembers: GroupMemberEntityOrm[];
 }

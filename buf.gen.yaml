@@ -1,0 +1,12 @@
+version: v2
+clean: true
+managed:
+  enabled: true
+plugins:
+  - remote: buf.build/community/stephenh-ts-proto:v1.149.0
+    opt:
+      - target=ts
+      - nestJs=true
+      - addGrpcMetadata=true
+      - outputIndex=true
+    out: src/presentation/grpc/proto-gen

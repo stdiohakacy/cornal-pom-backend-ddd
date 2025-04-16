@@ -1,0 +1,29 @@
+syntax = "proto3";
+package group.v1;
+import "google/protobuf/timestamp.proto";
+
+// DTO
+message GroupDto {
+    string name = 1;
+    string description = 2;
+    string creatorId = 3;
+}
+
+message ResponseMetadata {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Timestamp timestamp = 3;
+}
+
+message CreateGroupRequest {
+    GroupDto group = 1;
+}
+  
+message CreateGroupResponse {
+    ResponseMetadata response = 1;
+    string id = 2;
+}
+
+service GroupInfoService {
+    rpc CreateGroup(CreateGroupRequest) returns (CreateGroupResponse);
+}

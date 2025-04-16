@@ -8,7 +8,7 @@ import {
 
 export interface GroupMemberProps extends ValueObjectProps {
   userId: BaseUniqueEntityId;
-  groupId: BaseUniqueEntityId;
+  groupId?: BaseUniqueEntityId;
   role: 'admin' | 'member';
   joinedAt: Date;
 }
@@ -37,7 +37,6 @@ export class GroupMemberVO extends BaseValueObject<GroupMemberProps> {
   public static create(props: GroupMemberProps) {
     const guardResult = Guard.combine([
       Guard.againstNullOrUndefined(props.userId, 'userId'),
-      Guard.againstNullOrUndefined(props.groupId, 'groupId'),
       Guard.againstNullOrUndefined(props.joinedAt, 'joinedAt'),
       Guard.againstNullOrUndefined(props.role, 'role'),
       Guard.isOneOf(props.role, ['admin', 'member'], 'role'),
@@ -50,25 +49,17 @@ export class GroupMemberVO extends BaseValueObject<GroupMemberProps> {
     return Result.ok(new GroupMemberVO(props));
   }
 
-  static createAdmin(
-    userId: BaseUniqueEntityId,
-    groupId?: BaseUniqueEntityId,
-  ): Result<GroupMemberVO> {
+  static createAdmin(userId: BaseUniqueEntityId): Result<GroupMemberVO> {
     return this.create({
       userId,
-      groupId,
       role: 'admin',
       joinedAt: new Date(),
     });
   }
 
-  static createMember(
-    userId: BaseUniqueEntityId,
-    groupId?: BaseUniqueEntityId,
-  ): Result<GroupMemberVO> {
+  static createMember(userId: BaseUniqueEntityId): Result<GroupMemberVO> {
     return this.create({
       userId,
-      groupId,
       role: 'member',
       joinedAt: new Date(),
     });

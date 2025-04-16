@@ -1,0 +1,17 @@
+version: v2
+modules:
+  - path: src/presentation/grpc/protos
+lint:
+  use:
+    - DEFAULT
+    - COMMENTS
+  rpc_allow_google_protobuf_empty_requests: true
+breaking:
+  use:
+    - FILE
+    - WIRE_JSON
+  except:
+    - ENUM_NO_DELETE
+    - ENUM_VALUE_NO_DELETE
+    - FIELD_NO_DELETE
+    - RPC_NO_DELETE

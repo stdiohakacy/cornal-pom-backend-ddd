@@ -3,6 +3,8 @@
 /node_modules
 /build
 
+/src/presentation/grpc/proto-gen
+
 # Logs
 logs
 *.log
