@@ -4,7 +4,7 @@ import { UserEntityOrm } from '../entities/user.entity-orm';
 import { Repository } from 'typeorm';
 import { USER_SCHEMA } from '../schemas/user.schema';
 import { UserInfrastructureMapper } from '../mappers/user.infrastructure.mapper';
-import { BaseRepositoryImpl } from '@shared/infrastructure/typeorm/repository/repository.impl';
+import { BaseRepositoryImpl } from '@shared/infrastructure/typeorm/repository/base.repository.impl';
 import { UserRepositoryInterface } from 'src/application/repositories/group/user.repository.inteface';
 
 export class UserRepositoryImpl

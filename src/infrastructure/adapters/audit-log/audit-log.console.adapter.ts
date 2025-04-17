@@ -6,7 +6,7 @@ export class AuditLogConsoleAdapter implements AuditLogInterface {
   async log(action: string, data: Record<string, unknown>): Promise<void> {
     const timestamp = new Date().toISOString();
     console.log(
-      `[AUDIT-LOG-CONSOLE][${timestamp}] ${action}:`,
+      `[AUDIT-CONSOLE][${timestamp}] ${action}:`,
       JSON.stringify(data),
     );
   }

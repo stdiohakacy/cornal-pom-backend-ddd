@@ -1,5 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { BaseRepositoryImpl } from '@shared/infrastructure/typeorm/repository/repository.impl';
+import { BaseRepositoryImpl } from '@shared/infrastructure/typeorm/repository/base.repository.impl';
 import { DataSource, Repository } from 'typeorm';
 import { Group } from 'src/domain/bounded-context/group/aggregates/group.aggregate';
 import { GroupEntityOrm } from '../entities/group.entity-orm';

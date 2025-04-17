@@ -17,7 +17,7 @@ services:
     container_name: pom_neo4j_container
     restart: always
     environment:
-      NEO4J_AUTH: neo4j/admin@1234A # format: username/password
+      NEO4J_AUTH: neo4j/admin1234A # format: username/password
       NEO4J_dbms_security_procedures_unrestricted: gds.*
       NEO4J_dbms_memory_heap_initial__size: 512m
       NEO4J_dbms_memory_heap_max__size: 1G
@@ -28,7 +28,20 @@ services:
       - neo4j_data:/data
       - neo4j_logs:/logs
 
+  mongodb:
+    image: mongo:6
+    container_name: pom_audit_db_container
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin1234A
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_data:/data/db
+
 volumes:
   postgres_data:
   neo4j_data:
   neo4j_logs:
+  mongodb_data:

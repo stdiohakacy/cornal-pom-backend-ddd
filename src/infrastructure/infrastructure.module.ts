@@ -4,9 +4,11 @@ import { GroupEntityOrm } from './persistence/typeorm/entities/group.entity-orm'
 import { UserEntityOrm } from './persistence/typeorm/entities/user.entity-orm';
 import { GroupMemberEntityOrm } from './persistence/typeorm/entities/group-member.entity-orm';
 import { TypeOrmModule } from './persistence/typeorm/typeorm.module';
+import { MongoModule } from './persistence/mongo/mongo.module';
 
 @Module({
   imports: [
+    MongoModule,
     TypeOrmModule,
     NestTypeOrmModule.forFeature([
       GroupEntityOrm,
@@ -14,6 +16,6 @@ import { TypeOrmModule } from './persistence/typeorm/typeorm.module';
       GroupMemberEntityOrm,
     ]),
   ],
-  exports: [TypeOrmModule, NestTypeOrmModule],
+  exports: [TypeOrmModule, NestTypeOrmModule, MongoModule],
 })
 export class InfrastructureModule {}
