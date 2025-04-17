@@ -1,3 +1,3 @@
-import { GroupCreateUseCase } from './group/group.create.use-case';
+import { CreateGroupUseCase } from './group/group.create.use-case';
 
-export const useCases = [GroupCreateUseCase];
+export const useCases = [CreateGroupUseCase];

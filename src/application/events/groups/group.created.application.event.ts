@@ -1,19 +1,19 @@
-import { BaseApplicationEvent } from '@shared/application/base.application.event';
+import { ApplicationEvent } from '@shared/application/application.event';
 import { BaseUniqueEntityId } from '@shared/domain/identifier/base.unique-entity.id';
 
-export class GroupCreatedApplicationEvent extends BaseApplicationEvent<{
-  groupId: BaseUniqueEntityId;
-  creatorId: BaseUniqueEntityId;
-  name: string;
-}> {
+export class GroupCreatedApplicationEvent extends ApplicationEvent {
   constructor(
-    groupId: BaseUniqueEntityId,
-    creatorId: BaseUniqueEntityId,
-    name: string,
+    public readonly payload: {
+      groupId: BaseUniqueEntityId;
+      creatorId: BaseUniqueEntityId;
+      name: string;
+    },
+    public readonly timestamp: Date,
   ) {
-    super({ groupId, creatorId, name });
+    super('GroupCreated', 'group.created', 1, payload);
   }
+
   getName(): string {
-    return this.constructor.name;
+    return this.eventName;
   }
 }

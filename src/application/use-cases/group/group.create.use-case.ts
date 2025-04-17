@@ -32,7 +32,7 @@ export type GroupCreateResponse = Either<
 >;
 
 @Injectable()
-export class GroupCreateUseCase
+export class CreateGroupUseCase
   implements UseCaseInterface<GroupCreateDto, GroupCreateResponse>
 {
   constructor(
@@ -54,7 +54,7 @@ export class GroupCreateUseCase
         new RepositoryError(
           'Failed to check user',
           existOrError.value,
-          'GroupCreateUseCase',
+          'CreateGroupUseCase',
         ),
       );
     }
@@ -104,16 +104,18 @@ export class GroupCreateUseCase
           new RepositoryError(
             'Failed to save group',
             saveOrError.value,
-            'GroupCreateUseCase',
+            'CreateGroupUseCase',
           ),
         ),
       );
     }
 
     // Emit Event
-
-    this.eventBus.publish(
-      new GroupCreatedApplicationEvent(group.id, group.creatorId, group.name),
+    await this.eventBus.publish(
+      new GroupCreatedApplicationEvent(
+        { groupId: group.id, creatorId: group.creatorId, name: group.name },
+        new Date(),
+      ),
     );
 
     return right(Result.ok(group.id));

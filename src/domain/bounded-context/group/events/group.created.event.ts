@@ -3,6 +3,7 @@ import { BaseUniqueEntityId } from '@shared/domain/identifier/base.unique-entity
 
 export class GroupCreatedDomainEvent implements BaseDomainEventInterface {
   dateTimeOccurred: Date;
+  eventId: string;
 
   constructor(
     private readonly groupId: BaseUniqueEntityId,
@@ -20,6 +21,7 @@ export class GroupCreatedDomainEvent implements BaseDomainEventInterface {
       groupId: this.groupId.toString(),
       creatorId: this.creatorId.toString(),
       dateTimeOccurred: this.dateTimeOccurred,
+      eventId: this.eventId,
     };
   }
 }
