@@ -5,7 +5,7 @@ import { BaseUniqueEntityId } from '@shared/domain/identifier/base.unique-entity
 import {
   GROUP_REPOSITORY_PORT,
   GroupRepositoryInterface,
-} from 'src/application/repositories/group/group.repository.interface';
+} from 'src/application/ports/repositories/group/group.repository.interface';
 import {
   Either,
   left,
@@ -18,7 +18,7 @@ import { GroupMemberVO } from 'src/domain/bounded-context/group/value-objects/gr
 import {
   USER_REPOSITORY_PORT,
   UserRepositoryInterface,
-} from 'src/application/repositories/group/user.repository.inteface';
+} from 'src/application/ports/repositories/group/user.repository.inteface';
 import { GroupErrors } from 'src/domain/bounded-context/group/errors/group.errors';
 import { EventBus } from '@nestjs/cqrs';
 import { GroupCreatedApplicationEvent } from 'src/application/events/groups/app/group.created.app.event';

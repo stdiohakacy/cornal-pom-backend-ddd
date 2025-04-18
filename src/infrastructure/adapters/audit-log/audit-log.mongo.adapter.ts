@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { BaseUniqueEntityId } from '@shared/domain/identifier/base.unique-entity.id';
-import { AuditLogInterface } from 'src/application/audit-log/audit-log.interface';
+import { AuditLogInterface } from 'src/application/ports/audit-log/audit-log.interface';
 import {
   AUDIT_LOG_REPOSITORY_PORT,
   AuditLogRepositoryInterface,
-} from 'src/application/repositories/audit-log/audit-log.repository.interface';
+} from 'src/application/ports/repositories/audit-log/audit-log.repository.interface';
 import { AuditLog } from 'src/domain/bounded-context/audit-log/entities/audit-log.entity';
 
 @Injectable()

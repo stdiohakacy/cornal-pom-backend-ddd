@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { InfrastructureModule } from 'src/infrastructure/infrastructure.module';
-import { repositoryPorts } from './repositories';
+import { repositoryPorts } from './ports/repositories';
 import { useCases } from './use-cases';
 import { groupCommandHandlers } from './commands/handlers';
 import { groupAppEventHandlers } from './events/groups/app/handlers';

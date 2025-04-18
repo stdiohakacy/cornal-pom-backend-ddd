@@ -4,7 +4,7 @@ import { Inject } from '@nestjs/common';
 import {
   AUDIT_LOG_PORT,
   AuditLogInterface,
-} from 'src/application/audit-log/audit-log.interface';
+} from 'src/application/ports/audit-log/audit-log.interface';
 
 @EventsHandler(GroupCreatedApplicationEvent)
 export class GroupCreatedApplicationEventHandler

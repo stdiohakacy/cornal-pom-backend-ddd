@@ -3,7 +3,7 @@ import { BaseRepositoryImpl } from '@shared/infrastructure/typeorm/repository/ba
 import { DataSource, Repository } from 'typeorm';
 import { Group } from 'src/domain/bounded-context/group/aggregates/group.aggregate';
 import { GroupEntityOrm } from '../entities/group.entity-orm';
-import { GroupRepositoryInterface } from 'src/application/repositories/group/group.repository.interface';
+import { GroupRepositoryInterface } from 'src/application/ports/repositories/group/group.repository.interface';
 import { GROUP_SCHEMA } from '../schemas/group.schema';
 import { GroupInfrastructureMapper } from '../mappers/group.infrastructure.mapper';
 import { Either, left, right } from '@shared/domain/patterns/result.pattern';

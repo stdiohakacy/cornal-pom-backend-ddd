@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AuditLogInterface } from 'src/application/audit-log/audit-log.interface';
+import { AuditLogInterface } from 'src/application/ports/audit-log/audit-log.interface';
 
 @Injectable()
 export class AuditLogConsoleAdapter implements AuditLogInterface {
