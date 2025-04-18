@@ -7,7 +7,7 @@ import {
 } from 'src/application/audit-log/audit-log.interface';
 
 @EventsHandler(GroupCreatedApplicationEvent)
-export class GroupCreatedEventHandler
+export class GroupCreatedApplicationEventHandler
   implements IEventHandler<GroupCreatedApplicationEvent>
 {
   constructor(

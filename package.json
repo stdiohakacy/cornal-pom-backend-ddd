@@ -39,6 +39,7 @@
     "@nestjs/typeorm": "^11.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "kafkajs": "^2.2.4",
     "mongoose": "^8.13.2",
     "neo4j-driver": "^5.28.1",
     "pg": "^8.14.1",

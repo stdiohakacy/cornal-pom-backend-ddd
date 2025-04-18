@@ -1,7 +1,7 @@
-import { ApplicationEvent } from '@shared/application/application.event';
 import { BaseUniqueEntityId } from '@shared/domain/identifier/base.unique-entity.id';
+import { BaseApplicationEvent } from '@shared/events/base.event';
 
-export class GroupCreatedApplicationEvent extends ApplicationEvent {
+export class GroupCreatedApplicationEvent extends BaseApplicationEvent {
   constructor(
     public readonly payload: {
       groupId: BaseUniqueEntityId;
