@@ -5,7 +5,7 @@ import { UserEntityOrm } from './persistence/typeorm/entities/user.entity-orm';
 import { GroupMemberEntityOrm } from './persistence/typeorm/entities/group-member.entity-orm';
 import { TypeOrmModule } from './persistence/typeorm/typeorm.module';
 import { MongoModule } from './persistence/mongo/mongo.module';
-import { KafkaClientModule } from './messages/kafka/kafka-client.module';
+import { KafkaModule } from './messages/kafka/kafka.module';
 
 @Module({
   imports: [
@@ -16,8 +16,8 @@ import { KafkaClientModule } from './messages/kafka/kafka-client.module';
       UserEntityOrm,
       GroupMemberEntityOrm,
     ]),
-    KafkaClientModule,
+    KafkaModule,
   ],
-  exports: [TypeOrmModule, NestTypeOrmModule, MongoModule, KafkaClientModule],
+  exports: [TypeOrmModule, NestTypeOrmModule, MongoModule, KafkaModule],
 })
 export class InfrastructureModule {}

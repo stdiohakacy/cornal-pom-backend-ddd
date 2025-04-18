@@ -1,23 +1,13 @@
-import {
-  Injectable,
-  Logger,
-  OnModuleDestroy,
-  OnModuleInit,
-} from '@nestjs/common';
-import { EventPublisherInterface } from '@shared/application/event.publisher.interface';
-import { Kafka } from 'kafkajs';
+import { Inject, Injectable, Logger } from '@nestjs/common';
+import { Producer } from 'kafkajs';
+import { EventPublisherInterface } from 'src/application/ports/messages/event.publisher.interface';
+import { KAFKA_PRODUCER } from './kafka.provider';
 
 @Injectable()
-export class KafkaPublisherAdapter
-  implements EventPublisherInterface, OnModuleInit, OnModuleDestroy
-{
+export class KafkaPublisherAdapter implements EventPublisherInterface {
   private readonly logger = new Logger(KafkaPublisherAdapter.name);
-  private readonly kafka = new Kafka({
-    clientId: 'KAFKA_CLIENT_PRODUCER',
-    brokers: ['localhost:9092'],
-  });
 
-  private readonly producer = this.kafka.producer();
+  constructor(@Inject(KAFKA_PRODUCER) private readonly producer: Producer) {}
 
   async publish(topic: string, data: Record<string, unknown>): Promise<void> {
     try {
@@ -25,18 +15,10 @@ export class KafkaPublisherAdapter
         topic,
         messages: [{ value: JSON.stringify(data) }],
       });
+
       this.logger.debug(`Published to [${topic}]: ${JSON.stringify(data)}`);
     } catch (error) {
       this.logger.error(`Failed to publish to Kafka [${topic}]`, error);
     }
-  }
-
-  async onModuleInit(): Promise<void> {
-    await this.producer.connect();
-  }
-
-  async onModuleDestroy(): Promise<void> {
-    await this.producer.disconnect();
-    this.logger.log(`Kafka producer disconnected!`);
   }
 }
