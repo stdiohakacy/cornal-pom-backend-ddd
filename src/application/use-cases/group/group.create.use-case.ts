@@ -22,7 +22,7 @@ import {
 import { GroupErrors } from 'src/domain/bounded-context/group/errors/group.errors';
 import { EventBus } from '@nestjs/cqrs';
 import { GroupCreatedApplicationEvent } from 'src/application/events/groups/app/group.created.app.event';
-import { GroupCreatedKafkaEvent } from 'src/application/events/groups/integration/group.created.kafka.event';
+import { GroupCreatedIntegrationEvent } from 'src/application/events/groups/integration/group.created.integration.event';
 
 export type GroupCreateResponse = Either<
   | GroupErrors.CreatorNotFoundError
@@ -116,7 +116,7 @@ export class CreateGroupUseCase
         { groupId: group.id, creatorId: group.creatorId, name: group.name },
         new Date(),
       ),
-      new GroupCreatedKafkaEvent(
+      new GroupCreatedIntegrationEvent(
         group.id.toString(),
         group.name,
         group.createdAt,

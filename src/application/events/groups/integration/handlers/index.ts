@@ -1,3 +1,5 @@
-import { GroupCreatedKafkaHandler } from './group.created.kafka.event.handler';
+import { GroupCreatedIntegrationEventHandler } from './group.created.integration.event.handler';
 
-export const groupIntegrationEventHandlers = [GroupCreatedKafkaHandler];
+export const groupIntegrationEventHandlers = [
+  GroupCreatedIntegrationEventHandler,
+];
