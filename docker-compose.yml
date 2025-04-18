@@ -69,23 +69,27 @@ services:
       - zookeeper_data:/var/lib/zookeeper/data
       - zookeeper_logs:/var/lib/zookeeper/log
   eventstore:
-    image: eventstore/eventstore:21.10.0-buster-slim
-    container_name: pom_eventstore_container
-    restart: always
+    image: eventstore/eventstore:23.10.0-bookworm-slim
+    container_name: pom_event_store_container
     environment:
-      - EVENTSTORE_INSECURE=true
-      - EVENTSTORE_ENABLE_EXTERNAL_TCP=true
-      - EVENTSTORE_EXT_TCP_PORT=1113
-      - EVENTSTORE_HTTP_PORT=2113
+      - EVENTSTORE_CLUSTER_SIZE=1
       - EVENTSTORE_RUN_PROJECTIONS=All
       - EVENTSTORE_START_STANDARD_PROJECTIONS=true
-      - EVENTSTORE_MEM_DB=false
-      - EVENTSTORE_CLUSTER_SIZE=1
+      - EVENTSTORE_EXT_TCP_PORT=1113
+      - EVENTSTORE_HTTP_PORT=2113
+      - EVENTSTORE_INSECURE=true
+      - EVENTSTORE_ENABLE_EXTERNAL_TCP=true
+      - EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP=true
     ports:
-      - '2113:2113' # HTTP interface (management UI, admin API)
-      - '1113:1113' # TCP interface (for clients)
+      - '1113:1113'
+      - '2113:2113'
     volumes:
-      - eventstore_data:/var/lib/eventstore
+      - type: volume
+        source: eventstore-volume-data
+        target: /var/lib/eventstore
+      - type: volume
+        source: eventstore-volume-logs
+        target: /var/log/eventstore
 
 volumes:
   postgres_data:
@@ -95,4 +99,5 @@ volumes:
   kafka_data:
   zookeeper_data:
   zookeeper_logs:
-  eventstore_data:
+  eventstore-volume-data:
+  eventstore-volume-logs:

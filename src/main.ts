@@ -3,6 +3,7 @@ import { AppModule } from './app/app.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { join } from 'path';
 import { ReflectionService } from '@grpc/reflection';
+import { GroupDomainEventHandler } from './domain/bounded-context/group/events/group.created.domain.event.handler';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
@@ -29,6 +30,7 @@ async function bootstrap() {
       },
     },
   );
+  GroupDomainEventHandler.registerAll();
   await app.listen();
   console.log(`🚀 gRPC microservice running on port 6000`);
 }

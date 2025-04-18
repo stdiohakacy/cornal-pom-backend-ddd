@@ -23,6 +23,11 @@ import { GroupErrors } from 'src/domain/bounded-context/group/errors/group.error
 import { EventBus } from '@nestjs/cqrs';
 import { GroupCreatedApplicationEvent } from 'src/application/events/groups/app/group.created.app.event';
 import { GroupCreatedIntegrationEvent } from 'src/application/events/groups/integration/group.created.integration.event';
+import { BaseDomainEvent } from '@shared/domain/events/domain.event';
+import {
+  EVENT_STORE_PUBLISHER_PORT,
+  EventStorePublisherInterface,
+} from 'src/application/ports/messages/event-store.publisher.interface';
 
 export type GroupCreateResponse = Either<
   | GroupErrors.CreatorNotFoundError
@@ -41,6 +46,8 @@ export class CreateGroupUseCase
     private readonly userRepository: UserRepositoryInterface,
     @Inject(GROUP_REPOSITORY_PORT)
     private readonly groupRepository: GroupRepositoryInterface,
+    @Inject(EVENT_STORE_PUBLISHER_PORT)
+    private readonly eventStorePublisher: EventStorePublisherInterface,
     private readonly eventBus: EventBus,
   ) {}
 
@@ -120,6 +127,10 @@ export class CreateGroupUseCase
         group.id.toString(),
         group.name,
         group.createdAt,
+      ),
+      BaseDomainEvent.dispatchEventsForAggregateWithPersistence(
+        group.id,
+        this.eventStorePublisher,
       ),
     ]);
 

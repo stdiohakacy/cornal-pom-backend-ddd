@@ -6,6 +6,7 @@ import { GroupMemberEntityOrm } from './persistence/typeorm/entities/group-membe
 import { TypeOrmModule } from './persistence/typeorm/typeorm.module';
 import { MongoModule } from './persistence/mongo/mongo.module';
 import { KafkaModule } from './messages/kafka/kafka.module';
+import { EventStoreModule } from './persistence/event-store/event-store.module';
 
 @Module({
   imports: [
@@ -17,7 +18,14 @@ import { KafkaModule } from './messages/kafka/kafka.module';
       GroupMemberEntityOrm,
     ]),
     KafkaModule,
+    EventStoreModule,
   ],
-  exports: [TypeOrmModule, NestTypeOrmModule, MongoModule, KafkaModule],
+  exports: [
+    TypeOrmModule,
+    NestTypeOrmModule,
+    MongoModule,
+    KafkaModule,
+    EventStoreModule,
+  ],
 })
 export class InfrastructureModule {}

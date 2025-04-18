@@ -27,6 +27,7 @@
     "buf:gen": "pnpm buf generate"
   },
   "dependencies": {
+    "@eventstore/db-client": "^6.2.1",
     "@grpc/grpc-js": "^1.13.3",
     "@grpc/reflection": "^1.0.4",
     "@nestjs/common": "^10.0.0",

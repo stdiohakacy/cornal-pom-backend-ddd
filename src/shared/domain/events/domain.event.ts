@@ -1,3 +1,4 @@
+import { EventStorePublisherInterface } from 'src/application/ports/messages/event-store.publisher.interface';
 import { BaseAggregateRoot } from '../aggregates/base.aggregate-root';
 import { BaseUniqueEntityId } from '../identifier/base.unique-entity.id';
 import { BaseDomainEventInterface } from './domain.event.interface';
@@ -58,6 +59,19 @@ export class BaseDomainEvent {
     for (const event of aggregate.domainEvents) {
       await this.dispatch(event);
     }
+  }
+
+  public static async dispatchEventsForAggregateWithPersistence(
+    id: BaseUniqueEntityId,
+    publisher: EventStorePublisherInterface,
+  ): Promise<void> {
+    const aggregate = this.findMarkedAggregateById(id);
+    if (!aggregate) return;
+
+    await publisher.publish(aggregate.domainEvents);
+    await this.dispatchAggregateEvents(aggregate);
+    aggregate.clearEvents();
+    this.removeAggregateFromMarkedDispatchList(aggregate);
   }
 
   private static findMarkedAggregateById<T>(
