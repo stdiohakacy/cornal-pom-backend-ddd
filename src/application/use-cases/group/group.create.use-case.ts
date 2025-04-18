@@ -21,7 +21,7 @@ import {
 } from 'src/application/repositories/group/user.repository.inteface';
 import { GroupErrors } from 'src/domain/bounded-context/group/errors/group.errors';
 import { EventBus } from '@nestjs/cqrs';
-import { GroupCreatedApplicationEvent } from 'src/application/events/groups/app/group.created.application.event';
+import { GroupCreatedApplicationEvent } from 'src/application/events/groups/app/group.created.app.event';
 
 export type GroupCreateResponse = Either<
   | GroupErrors.CreatorNotFoundError

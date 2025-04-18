@@ -1,6 +1,6 @@
 import { BaseIntegrationEvent } from '@shared/events/base.event';
 
-export class GroupCreatedIntegrationEvent extends BaseIntegrationEvent {
+export class GroupCreatedKafkaEvent extends BaseIntegrationEvent {
   constructor(
     public readonly groupId: string,
     public readonly groupName: string,

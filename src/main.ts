@@ -1,6 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
-import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import {
+  ClientKafka,
+  MicroserviceOptions,
+  Transport,
+} from '@nestjs/microservices';
 import { join } from 'path';
 import { ReflectionService } from '@grpc/reflection';
 
@@ -29,6 +33,9 @@ async function bootstrap() {
       },
     },
   );
+
+  const kafkaClient = app.get<ClientKafka>('KAFKA_PRODUCER');
+  await kafkaClient.connect();
 
   await app.listen();
   console.log(`🚀 gRPC microservice running on port 6000`);

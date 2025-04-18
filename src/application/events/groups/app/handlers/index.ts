@@ -1,3 +1,3 @@
-import { GroupCreatedApplicationEventHandler } from './group.created.event.handler';
+import { GroupCreatedApplicationEventHandler } from './group.created.app.event.handler';
 
-export const groupEventHandlers = [GroupCreatedApplicationEventHandler];
+export const groupAppEventHandlers = [GroupCreatedApplicationEventHandler];
