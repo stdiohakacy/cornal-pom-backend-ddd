@@ -111,22 +111,17 @@ export class CreateGroupUseCase
       );
     }
 
-    // Application Event
-    await this.eventBus.publish(
+    this.eventBus.publishAll([
       new GroupCreatedApplicationEvent(
         { groupId: group.id, creatorId: group.creatorId, name: group.name },
         new Date(),
       ),
-    );
-
-    // Integration Event
-    await this.eventBus.publish(
       new GroupCreatedKafkaEvent(
         group.id.toString(),
         group.name,
         group.createdAt,
       ),
-    );
+    ]);
 
     return right(Result.ok(group.id));
   }
