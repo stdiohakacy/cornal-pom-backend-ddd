@@ -4,8 +4,8 @@ import {
   OnModuleDestroy,
   OnModuleInit,
 } from '@nestjs/common';
+import { EventPublisherInterface } from '@shared/application/event.publisher.interface';
 import { Kafka } from 'kafkajs';
-import { EventPublisherInterface } from 'src/application/ports/messaging/kafka/kafka.publisher.interface';
 
 @Injectable()
 export class KafkaPublisherAdapter

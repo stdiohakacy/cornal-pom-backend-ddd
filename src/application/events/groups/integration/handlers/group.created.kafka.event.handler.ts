@@ -4,7 +4,7 @@ import { GroupCreatedKafkaEvent } from '../group.created.kafka.event';
 import {
   EventPublisherInterface,
   EVENT_PUBLISHER_PORT,
-} from 'src/application/ports/messaging/kafka/kafka.publisher.interface';
+} from '@shared/application/event.publisher.interface';
 
 @EventsHandler(GroupCreatedKafkaEvent)
 export class GroupCreatedKafkaHandler
