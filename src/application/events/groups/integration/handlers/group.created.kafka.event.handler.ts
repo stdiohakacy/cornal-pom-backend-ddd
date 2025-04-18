@@ -2,8 +2,8 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 import { Inject } from '@nestjs/common';
 import { GroupCreatedKafkaEvent } from '../group.created.kafka.event';
 import {
-  KAFKA_PUBLISHER_PORT,
-  KafkaPublisherInterface,
+  EventPublisherInterface,
+  EVENT_PUBLISHER_PORT,
 } from 'src/application/ports/messaging/kafka/kafka.publisher.interface';
 
 @EventsHandler(GroupCreatedKafkaEvent)
@@ -11,11 +11,11 @@ export class GroupCreatedKafkaHandler
   implements IEventHandler<GroupCreatedKafkaEvent>
 {
   constructor(
-    @Inject(KAFKA_PUBLISHER_PORT)
-    private readonly kafkaPublisher: KafkaPublisherInterface,
+    @Inject(EVENT_PUBLISHER_PORT)
+    private readonly eventPublisher: EventPublisherInterface,
   ) {}
 
   async handle(event: GroupCreatedKafkaEvent): Promise<void> {
-    await this.kafkaPublisher.publish('group.created', event.toJSON());
+    await this.eventPublisher.publish('group.created', event.toJSON());
   }
 }

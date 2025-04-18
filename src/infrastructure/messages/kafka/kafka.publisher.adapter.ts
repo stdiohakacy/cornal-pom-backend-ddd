@@ -5,15 +5,15 @@ import {
   OnModuleInit,
 } from '@nestjs/common';
 import { Kafka } from 'kafkajs';
-import { KafkaPublisherInterface } from 'src/application/ports/messaging/kafka/kafka.publisher.interface';
+import { EventPublisherInterface } from 'src/application/ports/messaging/kafka/kafka.publisher.interface';
 
 @Injectable()
 export class KafkaPublisherAdapter
-  implements KafkaPublisherInterface, OnModuleInit, OnModuleDestroy
+  implements EventPublisherInterface, OnModuleInit, OnModuleDestroy
 {
   private readonly logger = new Logger(KafkaPublisherAdapter.name);
   private readonly kafka = new Kafka({
-    clientId: 'app-service',
+    clientId: 'KAFKA_CLIENT_PRODUCER',
     brokers: ['localhost:9092'],
   });
 

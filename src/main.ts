@@ -34,7 +34,7 @@ async function bootstrap() {
     },
   );
 
-  const kafkaClient = app.get<ClientKafka>('KAFKA_PRODUCER');
+  const kafkaClient = app.get<ClientKafka>('KAFKA_CLIENT_PRODUCER');
   await kafkaClient.connect();
 
   await app.listen();

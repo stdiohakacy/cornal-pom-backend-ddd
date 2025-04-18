@@ -1,5 +1,5 @@
-export const KAFKA_PUBLISHER_PORT = Symbol('KAFKA_PUBLISHER_PORT');
+export const EVENT_PUBLISHER_PORT = Symbol('EVENT_PUBLISHER_PORT');
 
-export interface KafkaPublisherInterface {
+export interface EventPublisherInterface {
   publish(topic: string, data: Record<string, unknown>): Promise<void>;
 }
