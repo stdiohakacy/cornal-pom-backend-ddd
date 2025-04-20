@@ -7,6 +7,7 @@ import { TypeOrmModule } from './persistence/typeorm/typeorm.module';
 import { MongoModule } from './persistence/mongo/mongo.module';
 import { KafkaModule } from './messages/kafka/kafka.module';
 import { EventStoreModule } from './persistence/event-store/event-store.module';
+import { CassandraModule } from './persistence/cassandra/cassandra.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { EventStoreModule } from './persistence/event-store/event-store.module';
     ]),
     KafkaModule,
     EventStoreModule,
+    CassandraModule,
   ],
   exports: [
     TypeOrmModule,
@@ -26,6 +28,7 @@ import { EventStoreModule } from './persistence/event-store/event-store.module';
     MongoModule,
     KafkaModule,
     EventStoreModule,
+    CassandraModule,
   ],
 })
 export class InfrastructureModule {}
