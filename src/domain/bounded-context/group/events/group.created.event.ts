@@ -2,14 +2,16 @@ import { BaseDomainEventInterface } from '@shared/domain/events/domain.event.int
 import { BaseUniqueEntityId } from '@shared/domain/identifier/base.unique-entity.id';
 
 export class GroupCreatedDomainEvent implements BaseDomainEventInterface {
-  dateTimeOccurred: Date;
-  eventId: string;
+  public readonly dateTimeOccurred: Date;
+  public readonly eventId: string;
 
   constructor(
     private readonly groupId: BaseUniqueEntityId,
-    private readonly creatorId: BaseUniqueEntityId,
+    public readonly creatorId: BaseUniqueEntityId,
+    public readonly groupName: string,
   ) {
     this.dateTimeOccurred = new Date();
+    this.eventId = crypto.randomUUID();
   }
 
   getAggregateRootId(): BaseUniqueEntityId {
@@ -20,7 +22,8 @@ export class GroupCreatedDomainEvent implements BaseDomainEventInterface {
     return {
       groupId: this.groupId.toString(),
       creatorId: this.creatorId.toString(),
-      dateTimeOccurred: this.dateTimeOccurred,
+      groupName: this.groupName,
+      occurredAt: this.dateTimeOccurred.toISOString(),
       eventId: this.eventId,
     };
   }

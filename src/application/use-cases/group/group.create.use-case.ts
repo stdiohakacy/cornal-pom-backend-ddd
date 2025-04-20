@@ -20,14 +20,11 @@ import {
   UserRepositoryInterface,
 } from 'src/application/ports/repositories/group/user.repository.inteface';
 import { GroupErrors } from 'src/domain/bounded-context/group/errors/group.errors';
-import { EventBus } from '@nestjs/cqrs';
-import { GroupCreatedApplicationEvent } from 'src/application/events/groups/app/group.created.app.event';
-import { GroupCreatedIntegrationEvent } from 'src/application/events/groups/integration/group.created.integration.event';
-import { BaseDomainEvent } from '@shared/domain/events/domain.event';
 import {
   EVENT_STORE_PUBLISHER_PORT,
   EventStorePublisherInterface,
 } from 'src/application/ports/messages/event-store.publisher.interface';
+import { BaseDomainEventDispatcher } from '@shared/domain/events/domain.event.dispatcher';
 
 export type GroupCreateResponse = Either<
   | GroupErrors.CreatorNotFoundError
@@ -48,7 +45,7 @@ export class CreateGroupUseCase
     private readonly groupRepository: GroupRepositoryInterface,
     @Inject(EVENT_STORE_PUBLISHER_PORT)
     private readonly eventStorePublisher: EventStorePublisherInterface,
-    private readonly eventBus: EventBus,
+    private readonly dispatcher: BaseDomainEventDispatcher,
   ) {}
 
   async execute(dto: GroupCreateDto): Promise<GroupCreateResponse> {
@@ -104,6 +101,7 @@ export class CreateGroupUseCase
     }
 
     const group = groupOrError.getValue();
+
     const saveOrError = await this.groupRepository.save(group);
 
     if (saveOrError.isLeft()) {
@@ -118,21 +116,12 @@ export class CreateGroupUseCase
       );
     }
 
-    this.eventBus.publishAll([
-      new GroupCreatedApplicationEvent(
-        { groupId: group.id, creatorId: group.creatorId, name: group.name },
-        new Date(),
-      ),
-      new GroupCreatedIntegrationEvent(
-        group.id.toString(),
-        group.name,
-        group.createdAt,
-      ),
-      BaseDomainEvent.dispatchEventsForAggregateWithPersistence(
-        group.id,
-        this.eventStorePublisher,
-      ),
-    ]);
+    this.dispatcher.markAggregateForDispatch(group);
+
+    await this.dispatcher.dispatchEventsWithPersistence(
+      group.id,
+      this.eventStorePublisher,
+    );
 
     return right(Result.ok(group.id));
   }

@@ -1,1 +1,1 @@
-export * from './group.created.app.event';
+export * from './group.created.application.event';

@@ -2,5 +2,5 @@ import { BaseDomainEventInterface } from '@shared/domain/events/domain.event.int
 
 export const EVENT_STORE_PUBLISHER_PORT = Symbol('EVENT_STORE_PUBLISHER_PORT');
 export interface EventStorePublisherInterface {
-  publish(events: BaseDomainEventInterface[]): Promise<void>;
+  publish(events: ReadonlyArray<BaseDomainEventInterface>): Promise<void>;
 }

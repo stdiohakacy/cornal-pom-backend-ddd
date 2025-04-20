@@ -8,7 +8,6 @@ export class GrpcExceptionFilter extends BaseRpcExceptionFilter<RpcException> {
   private readonly logger = new Logger(GrpcExceptionFilter.name);
 
   catch(exception: RpcException, host: ArgumentsHost): Observable<never> {
-    console.log(exception);
     const { code, message } = this.parseGrpcException(exception);
     const metadata = this.createMetadata();
 

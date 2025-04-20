@@ -45,7 +45,9 @@ export class Group extends BaseAggregateRoot<GroupProps> {
     );
 
     if (group) {
-      group.addDomainEvent(new GroupCreatedDomainEvent(group.id, adminUserId));
+      group.addDomainEvent(
+        new GroupCreatedDomainEvent(group.id, adminUserId, group.name),
+      );
     }
 
     return Result.ok<Group>(group);

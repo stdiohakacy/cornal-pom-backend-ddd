@@ -1,4 +1,3 @@
-import { BaseDomainEvent } from '../events/domain.event';
 import { BaseDomainEventInterface } from '../events/domain.event.interface';
 import { BaseUniqueEntityId } from '../identifier/base.unique-entity.id';
 import { BaseEntity } from '../entities/base.entity';
@@ -10,7 +9,7 @@ export abstract class BaseAggregateRoot<T> extends BaseEntity<T> {
     return this._id;
   }
 
-  get domainEvents(): BaseDomainEventInterface[] {
+  get domainEvents(): ReadonlyArray<BaseDomainEventInterface> {
     return this._domainEvents;
   }
 
@@ -25,19 +24,15 @@ export abstract class BaseAggregateRoot<T> extends BaseEntity<T> {
 
     if (!eventExisted) {
       this._domainEvents.push(domainEvent);
-      BaseDomainEvent.markAggregateForDispatch(this);
       this.logDomainEventAdded(domainEvent);
     }
   }
 
   private logDomainEventAdded(domainEvent: BaseDomainEventInterface): void {
-    const thisClass = Reflect.getPrototypeOf(this);
-    const domainEventClass = Reflect.getPrototypeOf(domainEvent);
+    const thisClassName = this.constructor.name;
+    const eventClassName = domainEvent.constructor.name;
     console.info(
-      `[Domain Event Created]:`,
-      thisClass.constructor.name,
-      '=====>',
-      domainEventClass.constructor.name,
+      `[Domain Event Created]: ${thisClassName} => ${eventClassName}`,
     );
   }
 }

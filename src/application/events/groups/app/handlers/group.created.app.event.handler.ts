@@ -1,5 +1,5 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { GroupCreatedApplicationEvent } from '../group.created.app.event';
+import { GroupCreatedApplicationEvent } from '../group.created.application.event';
 import { Inject } from '@nestjs/common';
 import {
   AUDIT_LOG_PORT,
