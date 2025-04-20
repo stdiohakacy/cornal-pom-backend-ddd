@@ -1,8 +1,8 @@
 import { Inject, Module, OnModuleDestroy } from '@nestjs/common';
+import { Producer } from 'kafkajs';
 import { KafkaProducerProvider, KAFKA_PRODUCER } from './kafka.provider';
 import { KafkaPublisherAdapter } from './kafka.publisher.adapter';
 import { EVENT_PUBLISHER_PORT } from 'src/application/ports/messages/event.publisher.interface';
-import { Producer } from 'kafkajs';
 
 @Module({
   providers: [
