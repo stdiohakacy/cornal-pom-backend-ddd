@@ -94,21 +94,23 @@ services:
     image: cassandra:4.1
     container_name: cassandra-1
     hostname: cassandra-1
+    networks:
+      default:
+        ipv4_address: 10.6.0.11
     ports:
-      - '7000:7000' # internode
-      - '9042:9042' # CQL
+      - '7000:7000'
+      - '9042:9042'
     environment:
       - CASSANDRA_CLUSTER_NAME=TestCluster
       - CASSANDRA_DC=dc1
       - CASSANDRA_RACK=rack1
       - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
-      - CASSANDRA_SEEDS=cassandra-1
+      - CASSANDRA_SEEDS=10.6.0.11
+      - CASSANDRA_PASSWORD_SEEDER=yes
       - MAX_HEAP_SIZE=512M
       - HEAP_NEWSIZE=100M
-    networks:
-      cassandra-net:
-        aliases:
-          - cassandra-1
+      - CASSANDRA_AUTHENTICATOR=PasswordAuthenticator
+    restart: unless-stopped
     volumes:
       - cassandra1_data:/var/lib/cassandra
 
@@ -116,61 +118,63 @@ services:
     image: cassandra:4.1
     container_name: cassandra-2
     hostname: cassandra-2
+    networks:
+      default:
+        ipv4_address: 10.6.0.12
+    depends_on:
+      - cassandra-1
     environment:
       - CASSANDRA_CLUSTER_NAME=TestCluster
       - CASSANDRA_DC=dc1
       - CASSANDRA_RACK=rack1
       - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
-      - CASSANDRA_SEEDS=cassandra-1
+      - CASSANDRA_SEEDS=10.6.0.11
       - MAX_HEAP_SIZE=512M
       - HEAP_NEWSIZE=100M
-    depends_on:
-      - cassandra-1
-    networks:
-      cassandra-net:
-        aliases:
-          - cassandra-2
+      - CASSANDRA_AUTHENTICATOR=PasswordAuthenticator
     volumes:
       - cassandra2_data:/var/lib/cassandra
+    restart: unless-stopped
 
   cassandra-3:
     image: cassandra:4.1
     container_name: cassandra-3
     hostname: cassandra-3
+    networks:
+      default:
+        ipv4_address: 10.6.0.13
+    depends_on:
+      - cassandra-1
     environment:
       - CASSANDRA_CLUSTER_NAME=TestCluster
       - CASSANDRA_DC=dc1
       - CASSANDRA_RACK=rack1
       - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
-      - CASSANDRA_SEEDS=cassandra-1
+      - CASSANDRA_SEEDS=10.6.0.11
       - MAX_HEAP_SIZE=512M
       - HEAP_NEWSIZE=100M
-    depends_on:
-      - cassandra-1
-    networks:
-      cassandra-net:
-        aliases:
-          - cassandra-3
+      - CASSANDRA_AUTHENTICATOR=PasswordAuthenticator
     volumes:
       - cassandra3_data:/var/lib/cassandra
+    restart: unless-stopped
 
   cassandra-web:
     image: dcagatay/cassandra-web:latest
+    container_name: cassandra-web
     ports:
       - 3000:3000
-    environment:
-      CASSANDRA_HOST_IPS: 127.0.0.1
-      CASSANDRA_PORT: 9042
-    restart: unless-stopped
+    networks:
+      default:
+        ipv4_address: 10.6.0.20
     depends_on:
       - cassandra-1
-    networks:
-      - cassandra-net
-    healthcheck:
-      test: ['CMD', 'cqlsh', '-e', 'describe keyspaces']
-      interval: 30s
-      timeout: 10s
-      retries: 10
+    environment:
+      CASSANDRA_HOST_IPS: 10.6.0.11
+      CASSANDRA_PORT: 9042
+      CASSANDRA_USER: cassandra
+      CASSANDRA_PASSWORD: cassandra
+    restart: unless-stopped
+
 volumes:
   postgres_data:
   neo4j_data:
@@ -186,5 +190,8 @@ volumes:
   cassandra3_data:
 
 networks:
-  cassandra-net:
+  default:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 10.6.0.0/24
