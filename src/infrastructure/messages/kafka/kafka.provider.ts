@@ -2,7 +2,6 @@ import { Provider } from '@nestjs/common';
 import { Kafka, Producer } from 'kafkajs';
 
 export const KAFKA_PRODUCER = Symbol('KAFKA_PRODUCER');
-
 export const KafkaProducerProvider: Provider = {
   provide: KAFKA_PRODUCER,
   useFactory: async (): Promise<Producer> => {
